@@ -1,0 +1,47 @@
+
+//+------------------------------------------------------------------+
+//|                                               Robot Choppiness.mq5|
+//|                                 Copyright 2022, Forex Robot Easy Team|
+//|                                                forexroboteasy.com|
+//+------------------------------------------------------------------+
+#property copyright 'Copyright 2022, Forex Robot Easy Team'
+#property link      'forexroboteasy.com'
+
+//--- input parameters
+input string SignalConnector = 'MT2'; // Signal connector program
+input int CandleTiming = 5; // Candle timing in minutes
+
+//--- indicator initialization function
+int OnInit()
+{
+   //--- check compatibility with MT4 platform
+   if (!EngineIsMetatrader4())
+   {
+      Print('This indicator can only be used on the MT4 platform!');
+      return INIT_FAILED;
+   }
+   
+   //--- set up the code to load any currency pair
+   SymbolSelectAll(true);
+   
+   //--- set the candle timing to M5
+   int timeframe = PERIOD_M5;
+   for (int i = 0; i < SymbolsTotal(); i++)
+   {
+      SymbolInfoSetString(SymbolName(i), SYMBOL_TIMEFRAME, 'M5');
+   }
+   
+   //--- initialization completed successfully
+   return INIT_SUCCEEDED;
+}
+
+//--- indicator calculation function
+int OnCalculate(const int rates_total, const int prev_calculated, const datetime &time[], const double &open[],
+               const double &high[], const double &low[], const double &close[], const long &tick_volume[],
+               const long &volume[], const int &spread[])
+{
+   //--- write code to generate automated signals here
+   //...
+
+   return rates_total;
+}
